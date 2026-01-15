@@ -2,8 +2,33 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
 
   # GET /products
+  require 'csv'
+
   def index
-    @products = Product.all.order(created_at: :desc)
+    @products = Product.with_attached_image.all.order(created_at: :desc)
+    
+    if params[:query].present?
+      @products = @products.where("name LIKE ?", "%#{params[:query]}%")
+    end
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+      format.csv do
+        send_data generate_csv(@products), filename: "products-#{Date.today}.csv"
+      end
+    end
+  end
+
+  private
+
+  def generate_csv(products)
+    CSV.generate(headers: true) do |csv|
+      csv << ["ID", "Name", "Description", "Price", "Quantity", "Low Stock Threshold"]
+      products.each do |product|
+        csv << [product.id, product.name, product.description, product.price, product.quantity, product.low_stock_threshold]
+      end
+    end
   end
 
   # GET /products/1
@@ -78,6 +103,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :price, :quantity, :low_stock_threshold)
+    params.require(:product).permit(:name, :description, :price, :quantity, :low_stock_threshold, :image)
   end
 end

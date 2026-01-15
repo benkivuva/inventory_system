@@ -27,6 +27,11 @@
           <%= form.number_field :low_stock_threshold, class: "block w-full rounded-lg border-slate-200 text-sm focus:border-indigo-primary focus:ring-indigo-primary" %>
         </div>
 
+        <div class="flex-1 min-w-[200px]">
+          <%= form.label :image, class: "block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1" %>
+          <%= form.file_field :image, class: "block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-primary hover:file:bg-indigo-100" %>
+        </div>
+
         <div class="flex items-center gap-2">
           <%= form.submit "Save", class: "px-4 py-2 bg-indigo-primary text-white text-sm font-semibold rounded-lg hover:bg-indigo-700 cursor-pointer shadow-sm" %>
           <%= link_to "Cancel", products_path, class: "px-4 py-2 text-slate-600 text-sm font-medium hover:text-slate-900" %>
