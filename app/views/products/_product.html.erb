@@ -10,15 +10,37 @@
       <%= number_to_currency(product.price) %>
     </td>
     <td class="px-6 py-4">
-      <div class="flex items-center gap-2">
-        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <%= product.low_stock? ? 'bg-amber-100 text-amber- warning' : 'bg-emerald-100 text-emerald-success' %>">
-          <%= product.quantity %>
-        </span>
-        <% if product.low_stock? %>
-          <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-rose-100 text-rose-danger uppercase tracking-wider">
-            Low Stock
+      <div class="flex items-center gap-4">
+        <div class="flex items-center border border-slate-200 rounded-lg overflow-hidden bg-white shadow-sm">
+          <%= button_to adjust_stock_product_path(product, adjustment: "decrement"), 
+              method: :patch, 
+              class: "px-2 py-1 bg-slate-50 hover:bg-slate-100 text-slate-600 transition duration-150 border-r border-slate-200",
+              title: "Decrease Stock" do %>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
+          <% end %>
+
+          <span class="px-3 min-w-[3rem] text-center font-bold text-slate-800 bg-white">
+            <%= product.quantity %>
           </span>
-        <% end %>
+
+          <%= button_to adjust_stock_product_path(product, adjustment: "increment"), 
+              method: :patch, 
+              class: "px-2 py-1 bg-slate-50 hover:bg-slate-100 text-indigo-primary transition duration-150 border-l border-slate-200",
+              title: "Increase Stock" do %>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          <% end %>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-medium <%= product.low_stock? ? 'bg-amber-100 text-amber-500' : 'bg-emerald-100 text-emerald-500' %>">
+            <%= product.low_stock? ? 'Low Stock' : 'Optimal' %>
+          </span>
+          <% if product.out_of_stock? %>
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-rose-100 text-rose-danger uppercase tracking-wider">
+              Out of Stock
+            </span>
+          <% end %>
+        </div>
       </div>
     </td>
     <td class="px-6 py-4 text-right space-x-3">

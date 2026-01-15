@@ -12,5 +12,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "products#index"
 
-  resources :products
+  resources :products do
+    member do
+      patch :adjust_stock
+    end
+  end
 end

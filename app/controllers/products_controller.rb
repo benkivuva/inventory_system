@@ -55,6 +55,22 @@ class ProductsController < ApplicationController
     end
   end
 
+  # PATCH /products/1/adjust_stock
+  def adjust_stock
+    manager = Inventory::StockManager.new(@product)
+    
+    @result = if params[:adjustment] == "increment"
+      manager.increment
+    else
+      manager.decrement
+    end
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to products_path, notice: @result.message }
+    end
+  end
+
   private
 
   def set_product
