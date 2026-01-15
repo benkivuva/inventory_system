@@ -10,12 +10,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'navy-dark': '#1E293B',
-                'soft-gray': '#F8FAFC',
-                'indigo-primary': '#6366F1',
-                'emerald-success': '#10B981',
-                'amber-warning': '#F59E0B',
-                'rose-danger': '#F43F5E',
+                // Custom colors can be added here if needed
             },
             fontFamily: {
                 sans: ['Inter var', ...defaultTheme.fontFamily.sans],
