@@ -68,3 +68,4 @@ group :test do
 end
 
 gem "pagy", "~> 9.3"
+gem "csv"

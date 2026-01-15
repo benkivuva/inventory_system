@@ -44,7 +44,7 @@
             </tr>
           </thead>
           <tbody id="products" class="divide-y divide-slate-700/50">
-            <%= render @products %>
+            <%= render partial: "product", collection: @products %>
           </tbody>
         </table>
       <% end %>
