@@ -22,13 +22,11 @@
 
       <%= link_to 'Add Product', new_product_path, 
           class: "inline-flex items-center px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-500 transition duration-200 shadow-lg shadow-indigo-900/20",
-          data: { turbo_frame: "new_product" } %>
+          data: { turbo_frame: "modal" } %>
     </div>
   </div>
 
   <div class="bg-slate-800 rounded-xl shadow-xl shadow-black/20 border border-slate-700/50 overflow-hidden">
-    <%= turbo_frame_tag "new_product" %>
-
     <div class="overflow-x-auto">
       <%= turbo_frame_tag "products_frame" do %>
         <table class="w-full text-sm text-left text-slate-400">

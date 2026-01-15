@@ -1,52 +1,56 @@
-<%= form_with(model: product, class: "contents") do |form| %>
-  <tr class="bg-slate-800 border-b border-indigo-500/30">
-    <td class="px-6 py-4" colspan="4">
-      <div class="flex flex-wrap items-end gap-4 p-2">
-        <div class="flex-1 min-w-[200px]">
-          <%= form.label :name, class: "block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1" %>
-          <%= form.text_field :name, class: "block w-full rounded-lg border-slate-600 bg-slate-900 text-white text-sm focus:border-indigo-500 focus:ring-indigo-500" %>
-        </div>
+<%= form_with(model: product, class: "space-y-6") do |form| %>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="col-span-full">
+      <%= form.label :name, class: "block text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2" %>
+      <%= form.text_field :name, class: "block w-full rounded-xl border-slate-700 bg-slate-900 text-white text-base py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500 transition-all shadow-inner", placeholder: "e.g. High Performance Server" %>
+    </div>
 
-        <div class="flex-1 min-w-[250px]">
-          <%= form.label :description, class: "block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1" %>
-          <%= form.text_field :description, class: "block w-full rounded-lg border-slate-600 bg-slate-900 text-white text-sm focus:border-indigo-500 focus:ring-indigo-500" %>
-        </div>
+    <div class="col-span-full">
+      <%= form.label :description, class: "block text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2" %>
+      <%= form.text_area :description, rows: 3, class: "block w-full rounded-xl border-slate-700 bg-slate-900 text-white text-base py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500 transition-all shadow-inner", placeholder: "Provide product details..." %>
+    </div>
 
-        <div class="w-32">
-          <%= form.label :price, class: "block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1" %>
-          <%= form.number_field :price, step: 0.01, class: "block w-full rounded-lg border-slate-600 bg-slate-900 text-white text-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+    <div>
+      <%= form.label :price, class: "block text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2" %>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+          <span class="text-slate-500">$</span>
         </div>
-
-        <div class="w-24">
-          <%= form.label :quantity, class: "block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1" %>
-          <%= form.number_field :quantity, class: "block w-full rounded-lg border-slate-600 bg-slate-900 text-white text-sm focus:border-indigo-500 focus:ring-indigo-500" %>
-        </div>
-
-        <div class="w-24">
-          <%= form.label :threshold, "Low Stock", class: "block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1" %>
-          <%= form.number_field :low_stock_threshold, class: "block w-full rounded-lg border-slate-600 bg-slate-900 text-white text-sm focus:border-indigo-500 focus:ring-indigo-500" %>
-        </div>
-
-        <div class="flex-1 min-w-[200px]">
-          <%= form.label :image, class: "block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1" %>
-          <%= form.file_field :image, class: "block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-slate-700 file:text-white hover:file:bg-slate-600 cursor-pointer" %>
-        </div>
-
-        <div class="flex items-center gap-2">
-          <%= form.submit "Save", class: "px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-lg hover:bg-indigo-500 cursor-pointer shadow-lg shadow-indigo-900/30 transition-all" %>
-          <%= link_to "Cancel", products_path, class: "px-4 py-2 text-slate-400 text-sm font-medium hover:text-white transition-colors" %>
-        </div>
+        <%= form.number_field :price, step: 0.01, class: "block w-full pl-8 pr-4 py-3 rounded-xl border-slate-700 bg-slate-900 text-white text-base focus:border-indigo-500 focus:ring-indigo-500 transition-all shadow-inner" %>
       </div>
+    </div>
 
-      <% if product.errors.any? %>
-        <div id="error_explanation" class="mt-2 px-2 text-rose-400 text-xs font-medium">
-          <ul>
-            <% product.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-    </td>
-  </tr>
+    <div>
+      <%= form.label :quantity, "Initial Stock", class: "block text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2" %>
+      <%= form.number_field :quantity, class: "block w-full px-4 py-3 rounded-xl border-slate-700 bg-slate-900 text-white text-base focus:border-indigo-500 focus:ring-indigo-500 transition-all shadow-inner" %>
+    </div>
+
+    <div>
+      <%= form.label :low_stock_threshold, "Alert Threshold", class: "block text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2" %>
+      <%= form.number_field :low_stock_threshold, class: "block w-full px-4 py-3 rounded-xl border-slate-700 bg-slate-900 text-white text-base focus:border-indigo-500 focus:ring-indigo-500 transition-all shadow-inner" %>
+    </div>
+
+    <div>
+      <%= form.label :image, class: "block text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2" %>
+      <%= form.file_field :image, class: "block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-white hover:file:bg-slate-700 cursor-pointer transition-all border border-slate-700 border-dashed p-2 rounded-xl" %>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-end gap-3 pt-6 border-t border-slate-800">
+    <button type="button" data-action="click->modal#close" class="px-6 py-2.5 text-sm font-semibold text-slate-400 hover:text-white transition-colors">
+      Cancel
+    </button>
+    <%= form.submit "Save Product", class: "px-8 py-2.5 bg-indigo-600 text-white text-sm font-bold rounded-xl hover:bg-indigo-500 active:scale-95 transition-all shadow-lg shadow-indigo-500/20 cursor-pointer" %>
+  </div>
+
+  <% if product.errors.any? %>
+    <div id="error_explanation" class="p-4 bg-rose-900/20 border border-rose-500/30 rounded-xl mt-4">
+      <h2 class="text-rose-400 text-sm font-bold mb-2"><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+      <ul class="text-rose-400 text-xs space-y-1 list-disc list-inside">
+        <% product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 <% end %>
