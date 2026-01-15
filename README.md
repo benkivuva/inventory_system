@@ -22,6 +22,17 @@ A professional, real-time inventory management application built with **Ruby on 
 - **CSV Export**: Download your entire inventory data with one click.
 - **Image Support**: Upload and display product thumbnails via Active Storage.
 - **Professional Dark Mode**: A custom-designed, high-contrast Slate theme suitable for enterprise use.
+- **Data Pagination**: Efficiently manage large inventories with Pagy (10 items per page).
+
+### Stock Health Analytics
+- **Real-Time Dashboard**: Monitor Total Inventory Value, Low Stock Alerts, and Out-of-Stock critical items at a glance.
+- **Animated KPIs**: Numbers animate smoothly upon update for a premium feel.
+- **Live Broadcasting**: Dashboard stats update instantly for all users via Turbo Streams when stock changes.
+
+### Atomic Audit Trail
+- **Immutable Log**: Every stock change is permanently recorded in the `StockMovement` table.
+- **Granular Detail**: Tracks "Initial Stock", "Manual Adjustments" (increment/decrement), and "Edits" (from form).
+- **History Modal**: View the chronological history of any product with a single click.
 
 ---
 
@@ -93,6 +104,9 @@ Stock logic is encapsulated in `Inventory::StockManager` (if applicable) or robu
 
 ### 4. Professional Aesthetics
 We moved away from default Tailwind colors to a curated **Slate** palette (`bg-slate-900`, `text-slate-300`) to give the application a premium SaaS look and feel.
+
+### 5. Data Integrity with Transactions
+Every inventory update is wrapped in an ACID-compliant transaction. This ensures that the stock count and the audit log entry are either both saved successfully or both rolled back, preventing orphaned data.
 
 ---
 
