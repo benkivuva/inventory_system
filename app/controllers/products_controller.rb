@@ -40,6 +40,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
+        flash.now[:notice] = "Product was successfully created."
         format.html { redirect_to products_path, notice: "Product was successfully created." }
         format.turbo_stream
       else
@@ -52,6 +53,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
+        flash.now[:notice] = "Product was successfully updated."
         format.html { redirect_to products_path, notice: "Product was successfully updated." }
         format.turbo_stream
       else
@@ -64,6 +66,7 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy!
 
+    flash.now[:notice] = "Product was successfully destroyed."
     respond_to do |format|
       format.html { redirect_to products_path, notice: "Product was successfully destroyed." }
       format.turbo_stream
