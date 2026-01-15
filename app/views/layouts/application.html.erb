@@ -23,9 +23,13 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+  <body class="bg-soft-gray">
+    <%= render "layouts/sidebar" %>
+
+    <div class="p-4 sm:ml-64">
+      <div class="p-4 rounded-lg mt-14">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
