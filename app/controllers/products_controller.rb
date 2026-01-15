@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :set_product, only: %i[ show edit update destroy adjust_stock ]
 
   # GET /products
   require 'csv'
@@ -16,17 +16,6 @@ class ProductsController < ApplicationController
       format.turbo_stream
       format.csv do
         send_data generate_csv(@products), filename: "products-#{Date.today}.csv"
-      end
-    end
-  end
-
-  private
-
-  def generate_csv(products)
-    CSV.generate(headers: true) do |csv|
-      csv << ["ID", "Name", "Description", "Price", "Quantity", "Low Stock Threshold"]
-      products.each do |product|
-        csv << [product.id, product.name, product.description, product.price, product.quantity, product.low_stock_threshold]
       end
     end
   end
@@ -100,6 +89,15 @@ class ProductsController < ApplicationController
 
   def set_product
     @product = Product.find(params[:id])
+  end
+
+  def generate_csv(products)
+    CSV.generate(headers: true) do |csv|
+      csv << ["ID", "Name", "Description", "Price", "Quantity", "Low Stock Threshold"]
+      products.each do |product|
+        csv << [product.id, product.name, product.description, product.price, product.quantity, product.low_stock_threshold]
+      end
+    end
   end
 
   def product_params
