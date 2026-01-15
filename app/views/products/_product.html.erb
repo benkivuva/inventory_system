@@ -1,0 +1,29 @@
+<%= turbo_frame_tag dom_id(product) do %>
+  <tr class="bg-white border-b border-slate-100 hover:bg-slate-50 transition duration-150">
+    <td class="px-6 py-4">
+      <div class="flex flex-col">
+        <span class="font-medium text-slate-900"><%= product.name %></span>
+        <span class="text-xs text-slate-500 line-clamp-1"><%= product.description %></span>
+      </div>
+    </td>
+    <td class="px-6 py-4 text-slate-700 font-medium">
+      <%= number_to_currency(product.price) %>
+    </td>
+    <td class="px-6 py-4">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <%= product.low_stock? ? 'bg-amber-100 text-amber- warning' : 'bg-emerald-100 text-emerald-success' %>">
+          <%= product.quantity %>
+        </span>
+        <% if product.low_stock? %>
+          <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-rose-100 text-rose-danger uppercase tracking-wider">
+            Low Stock
+          </span>
+        <% end %>
+      </div>
+    </td>
+    <td class="px-6 py-4 text-right space-x-3">
+      <%= link_to "Edit", edit_product_path(product), class: "text-indigo-primary hover:text-indigo-700 font-medium", data: { turbo_frame: dom_id(product) } %>
+      <%= button_to "Delete", product_path(product), method: :delete, class: "text-rose-danger hover:text-rose-700 font-medium inline-block", data: { turbo_confirm: "Are you sure?" } %>
+    </td>
+  </tr>
+<% end %>
