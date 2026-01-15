@@ -1,3 +1,9 @@
-<%= turbo_stream.replace dom_id(@product), partial: "products/product", locals: { product: @product } %>
-<%= turbo_stream.update "product-count", Product.count %>
-<%= turbo_stream.prepend "flash", partial: "layouts/flash", locals: { message: @result.message } %>
+<%= turbo_stream.replace "dashboard-stats", partial: "dashboard_stats" %>
+<%= turbo_stream.replace @product do %>
+  <%= render @product %>
+<% end %>
+<% if @result.message.present? %>
+  <%= turbo_stream.prepend "flash" do %>
+    <%= render "layouts/flash_message", message: @result.message, type: @result.success? ? :notice : :alert %>
+  <% end %>
+<% end %>

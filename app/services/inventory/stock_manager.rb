@@ -5,24 +5,27 @@ module Inventory
     end
 
     def increment(amount = 1)
-      @product.quantity += amount
-      save_with_result("Stock increased for #{@product.name}")
+      adjust_stock(amount)
     end
 
     def decrement(amount = 1)
-      if @product.quantity < amount
-        return Result.new(success: false, message: "Insufficient stock for #{@product.name}")
-      end
-
-      @product.quantity -= amount
-      save_with_result("Stock decreased for #{@product.name}")
+      adjust_stock(-amount)
     end
 
     private
 
-    def save_with_result(success_message)
+    def adjust_stock(amount)
+      # 1. Check constraints (soft check)
+      if amount.negative? && @product.quantity < amount.abs
+        return Result.new(success: false, message: "Insufficient stock for #{@product.name}")
+      end
+
+      # 2. Update Product (Model callback handles logging)
+      @product.quantity += amount
+      
       if @product.save
-        Result.new(success: true, message: success_message)
+        action_verb = amount.positive? ? "increased" : "decreased"
+        Result.new(success: true, message: "Stock #{action_verb} for #{@product.name}")
       else
         Result.new(success: false, message: @product.errors.full_messages.to_sentence)
       end

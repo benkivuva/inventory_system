@@ -1,3 +1,4 @@
-<%= turbo_stream.remove dom_id(@product) %>
-<%= turbo_stream.update "product-count", Product.count %>
-<%= turbo_stream.prepend "flash", partial: "layouts/flash", locals: { message: "Product deleted." } %>
+<%= turbo_stream.replace "dashboard-stats", partial: "dashboard_stats" %>
+<%= turbo_stream.replace "sidebar_product_count", partial: "layouts/sidebar_count" %>
+<%= turbo_stream.remove @product %>
+<%= turbo_stream.prepend "flash", partial: "layouts/flash" %>

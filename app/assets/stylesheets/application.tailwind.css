@@ -1,3 +1,5 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "pagy.css";
+@import "pagy.css";

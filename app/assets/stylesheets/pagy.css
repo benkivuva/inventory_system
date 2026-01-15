@@ -1,0 +1,25 @@
+/* Pagy Pagination Styling */
+.pagy-nav {
+    @apply flex justify-center items-center gap-1 mt-6 select-none;
+}
+
+.pagy-nav .page a {
+    @apply inline-flex items-center justify-center min-w-[2.5rem] h-10 px-3 py-2 text-sm font-medium text-slate-400 bg-slate-800 border border-slate-700 rounded-lg hover:bg-slate-700 hover:text-white hover:border-slate-600 transition-all duration-200 shadow-sm;
+}
+
+.pagy-nav .page.active {
+    @apply inline-flex items-center justify-center min-w-[2.5rem] h-10 px-3 py-2 text-sm font-bold text-white bg-indigo-600 border border-indigo-500 rounded-lg shadow-md shadow-indigo-900/30 cursor-default;
+}
+
+.pagy-nav .page.disabled {
+    @apply inline-flex items-center justify-center min-w-[2.5rem] h-10 px-3 py-2 text-sm text-slate-600 bg-slate-900/50 border border-slate-800 rounded-lg cursor-not-allowed opacity-50;
+}
+
+.pagy-nav .page.gap {
+    @apply inline-flex items-center justify-center min-w-[2rem] h-10 text-sm font-medium text-slate-600 cursor-default;
+}
+
+.pagy-nav .page.prev a,
+.pagy-nav .page.next a {
+    @apply px-4 font-semibold tracking-wide;
+}

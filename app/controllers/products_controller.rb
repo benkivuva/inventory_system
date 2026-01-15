@@ -1,11 +1,12 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[ show edit update destroy adjust_stock ]
+  before_action :set_product, only: %i[ show edit update destroy adjust_stock history ]
 
   # GET /products
   require 'csv'
 
   def index
-    @products = Product.with_attached_image.all.order(created_at: :desc)
+    @pagy, @products = pagy(Product.with_attached_image.all.order(created_at: :desc))
+    @stats = Inventory::DashboardStats.new
     
     if params[:query].present?
       @products = @products.where("name LIKE ?", "%#{params[:query]}%")
@@ -70,6 +71,9 @@ class ProductsController < ApplicationController
   end
 
   # PATCH /products/1/adjust_stock
+  def history
+  end
+
   def adjust_stock
     manager = Inventory::StockManager.new(@product)
     

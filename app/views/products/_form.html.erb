@@ -1,52 +1,52 @@
-<%= form_with(model: product, class: "space-y-6") do |form| %>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<%= form_with(model: product, class: "space-y-4") do |form| %>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div class="col-span-full">
-      <%= form.label :name, class: "block text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2" %>
-      <%= form.text_field :name, class: "block w-full rounded-xl border-slate-700 bg-slate-900 text-white text-base py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500 transition-all shadow-inner", placeholder: "e.g. High Performance Server" %>
+      <%= form.label :name, class: "block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1" %>
+      <%= form.text_field :name, class: "block w-full rounded-lg border-slate-700 bg-slate-900 text-white text-sm py-2 px-3 focus:border-indigo-500 focus:ring-indigo-500 transition-all shadow-inner", placeholder: "e.g. High Performance Server" %>
     </div>
 
     <div class="col-span-full">
-      <%= form.label :description, class: "block text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2" %>
-      <%= form.text_area :description, rows: 3, class: "block w-full rounded-xl border-slate-700 bg-slate-900 text-white text-base py-3 px-4 focus:border-indigo-500 focus:ring-indigo-500 transition-all shadow-inner", placeholder: "Provide product details..." %>
+      <%= form.label :description, class: "block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1" %>
+      <%= form.text_area :description, rows: 2, class: "block w-full rounded-lg border-slate-700 bg-slate-900 text-white text-sm py-2 px-3 focus:border-indigo-500 focus:ring-indigo-500 transition-all shadow-inner", placeholder: "Provide product details..." %>
     </div>
 
     <div>
-      <%= form.label :price, class: "block text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2" %>
+      <%= form.label :price, class: "block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1" %>
       <div class="relative">
-        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-          <span class="text-slate-500">$</span>
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <span class="text-slate-500 text-sm">$</span>
         </div>
-        <%= form.number_field :price, step: 0.01, class: "block w-full pl-8 pr-4 py-3 rounded-xl border-slate-700 bg-slate-900 text-white text-base focus:border-indigo-500 focus:ring-indigo-500 transition-all shadow-inner" %>
+        <%= form.number_field :price, step: 0.01, class: "block w-full pl-6 pr-3 py-2 rounded-lg border-slate-700 bg-slate-900 text-white text-sm focus:border-indigo-500 focus:ring-indigo-500 transition-all shadow-inner" %>
       </div>
     </div>
 
     <div>
-      <%= form.label :quantity, "Initial Stock", class: "block text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2" %>
-      <%= form.number_field :quantity, class: "block w-full px-4 py-3 rounded-xl border-slate-700 bg-slate-900 text-white text-base focus:border-indigo-500 focus:ring-indigo-500 transition-all shadow-inner" %>
+      <%= form.label :quantity, "Initial Stock", class: "block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1" %>
+      <%= form.number_field :quantity, class: "block w-full px-3 py-2 rounded-lg border-slate-700 bg-slate-900 text-white text-sm focus:border-indigo-500 focus:ring-indigo-500 transition-all shadow-inner" %>
     </div>
 
     <div>
-      <%= form.label :low_stock_threshold, "Alert Threshold", class: "block text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2" %>
-      <%= form.number_field :low_stock_threshold, class: "block w-full px-4 py-3 rounded-xl border-slate-700 bg-slate-900 text-white text-base focus:border-indigo-500 focus:ring-indigo-500 transition-all shadow-inner" %>
+      <%= form.label :low_stock_threshold, "Alert Threshold", class: "block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1" %>
+      <%= form.number_field :low_stock_threshold, class: "block w-full px-3 py-2 rounded-lg border-slate-700 bg-slate-900 text-white text-sm focus:border-indigo-500 focus:ring-indigo-500 transition-all shadow-inner" %>
     </div>
 
     <div>
-      <%= form.label :image, class: "block text-sm font-semibold text-slate-400 uppercase tracking-wider mb-2" %>
-      <%= form.file_field :image, class: "block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-slate-800 file:text-white hover:file:bg-slate-700 cursor-pointer transition-all border border-slate-700 border-dashed p-2 rounded-xl" %>
+      <%= form.label :image, class: "block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1" %>
+      <%= form.file_field :image, class: "block w-full text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-bold file:bg-slate-800 file:text-white hover:file:bg-slate-700 cursor-pointer transition-all border border-slate-700 border-dashed p-1.5 rounded-lg" %>
     </div>
   </div>
 
-  <div class="flex items-center justify-end gap-3 pt-6 border-t border-slate-800">
-    <button type="button" data-action="click->modal#close" class="px-6 py-2.5 text-sm font-semibold text-slate-400 hover:text-white transition-colors">
+  <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
+    <button type="button" data-action="click->modal#close" class="px-4 py-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors">
       Cancel
     </button>
-    <%= form.submit "Save Product", class: "px-8 py-2.5 bg-indigo-600 text-white text-sm font-bold rounded-xl hover:bg-indigo-500 active:scale-95 transition-all shadow-lg shadow-indigo-500/20 cursor-pointer" %>
+    <%= form.submit "Save Product", class: "px-6 py-2 bg-indigo-600 text-white text-sm font-bold rounded-lg hover:bg-indigo-500 active:scale-95 transition-all shadow-lg shadow-indigo-500/20 cursor-pointer" %>
   </div>
 
   <% if product.errors.any? %>
-    <div id="error_explanation" class="p-4 bg-rose-900/20 border border-rose-500/30 rounded-xl mt-4">
-      <h2 class="text-rose-400 text-sm font-bold mb-2"><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
-      <ul class="text-rose-400 text-xs space-y-1 list-disc list-inside">
+    <div id="error_explanation" class="p-3 bg-rose-900/20 border border-rose-500/30 rounded-lg mt-3">
+      <h2 class="text-rose-400 text-xs font-bold mb-1"><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+      <ul class="text-rose-400 text-[10px] space-y-0.5 list-disc list-inside">
         <% product.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>

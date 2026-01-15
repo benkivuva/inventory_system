@@ -1,0 +1,47 @@
+<div id="dashboard-stats" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <% stats = Inventory::DashboardStats.new %>
+  
+  <!-- Total Value Card -->
+  <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl shadow-black/20">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-slate-400 text-sm font-semibold uppercase tracking-wider">Total Inventory Value</h3>
+      <div class="p-2 bg-indigo-500/10 rounded-lg">
+        <svg class="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+    </div>
+    <div class="flex items-baseline gap-1">
+      <span class="text-3xl font-bold text-white">$</span>
+      <span class="text-3xl font-bold text-white" data-controller="counter" data-value="<%= stats.total_inventory_value.to_i %>">
+        <%= stats.total_inventory_value.to_i %>
+      </span>
+    </div>
+  </div>
+
+  <!-- At Risk Card -->
+  <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl shadow-black/20">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-slate-400 text-sm font-semibold uppercase tracking-wider">Items At Risk</h3>
+      <div class="p-2 bg-amber-500/10 rounded-lg">
+        <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+      </div>
+    </div>
+    <span class="text-3xl font-bold text-white" data-controller="counter" data-value="<%= stats.items_at_risk %>">
+      <%= stats.items_at_risk %>
+    </span>
+    <span class="ml-2 text-sm text-amber-400">Low Stock</span>
+  </div>
+
+  <!-- Out of Stock Card -->
+  <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 shadow-xl shadow-black/20">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-slate-400 text-sm font-semibold uppercase tracking-wider">Out of Stock</h3>
+      <div class="p-2 bg-rose-500/10 rounded-lg">
+        <svg class="w-6 h-6 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+      </div>
+    </div>
+    <span class="text-3xl font-bold text-white" data-controller="counter" data-value="<%= stats.out_of_stock_count %>">
+      <%= stats.out_of_stock_count %>
+    </span>
+    <span class="ml-2 text-sm text-rose-400">Critical</span>
+  </div>
+</div>

@@ -1,4 +1,7 @@
-<%= turbo_stream.replace dom_id(@product), partial: "products/product", locals: { product: @product } %>
-<%= turbo_stream.update "modal", "" %>
-<%= turbo_stream.update "product-count", Product.count %>
-<%= turbo_stream.prepend "flash", partial: "layouts/flash", locals: { message: "Product updated successfully." } %>
+<%= turbo_stream.replace "dashboard-stats", partial: "dashboard_stats" %>
+<%= turbo_stream.replace "sidebar_product_count", partial: "layouts/sidebar_count" %>
+<%= turbo_stream.replace "modal", "" %>
+<%= turbo_stream.replace @product do %>
+  <%= render @product %>
+<% end %>
+<%= turbo_stream.prepend "flash", partial: "layouts/flash" %>
