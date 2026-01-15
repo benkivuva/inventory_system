@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   has_one_attached :image
   has_many :stock_movements, dependent: :destroy
-  
+
   after_create :log_creation
   after_update :log_stock_change, if: :saved_change_to_quantity?
   validates :name, presence: true
@@ -29,7 +29,7 @@ class Product < ApplicationRecord
     previous_qty = saved_change_to_quantity[0].to_i
     new_qty = saved_change_to_quantity[1].to_i
     diff = new_qty - previous_qty
-    
+
     action_type = diff.positive? ? "addition" : "reduction"
     reason = "Quantity changed from #{previous_qty} to #{new_qty}"
 
@@ -42,7 +42,7 @@ class Product < ApplicationRecord
 
   def log_creation
     return if quantity.zero?
-    
+
     stock_movements.create(
       amount: quantity,
       action: "initial",

@@ -2,12 +2,12 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy adjust_stock history ]
 
   # GET /products
-  require 'csv'
+  require "csv"
 
   def index
     @pagy, @products = pagy(Product.with_attached_image.all.order(created_at: :desc))
     @stats = Inventory::DashboardStats.new
-    
+
     if params[:query].present?
       @products = @products.where("name LIKE ?", "%#{params[:query]}%")
     end
@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to products_path, notice: 'Product was successfully created.' }
+        format.html { redirect_to products_path, notice: "Product was successfully created." }
         format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to products_path, notice: 'Product was successfully updated.' }
+        format.html { redirect_to products_path, notice: "Product was successfully updated." }
         format.turbo_stream
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -65,7 +65,7 @@ class ProductsController < ApplicationController
     @product.destroy!
 
     respond_to do |format|
-      format.html { redirect_to products_path, notice: 'Product was successfully destroyed.' }
+      format.html { redirect_to products_path, notice: "Product was successfully destroyed." }
       format.turbo_stream
     end
   end
@@ -76,7 +76,7 @@ class ProductsController < ApplicationController
 
   def adjust_stock
     manager = Inventory::StockManager.new(@product)
-    
+
     @result = if params[:adjustment] == "increment"
       manager.increment
     else
@@ -97,9 +97,9 @@ class ProductsController < ApplicationController
 
   def generate_csv(products)
     CSV.generate(headers: true) do |csv|
-      csv << ["ID", "Name", "Description", "Price", "Quantity", "Low Stock Threshold"]
+      csv << [ "ID", "Name", "Description", "Price", "Quantity", "Low Stock Threshold" ]
       products.each do |product|
-        csv << [product.id, product.name, product.description, product.price, product.quantity, product.low_stock_threshold]
+        csv << [ product.id, product.name, product.description, product.price, product.quantity, product.low_stock_threshold ]
       end
     end
   end

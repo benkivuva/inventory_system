@@ -22,7 +22,7 @@ module Inventory
 
       # 2. Update Product (Model callback handles logging)
       @product.quantity += amount
-      
+
       if @product.save
         action_verb = amount.positive? ? "increased" : "decreased"
         Result.new(success: true, message: "Stock #{action_verb} for #{@product.name}")
