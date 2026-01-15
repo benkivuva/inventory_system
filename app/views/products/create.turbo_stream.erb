@@ -1,5 +1,5 @@
 <%= turbo_stream.replace "dashboard-stats", partial: "dashboard_stats" %>
 <%= turbo_stream.replace "sidebar_product_count", partial: "layouts/sidebar_count" %>
-<%= turbo_stream.replace "modal", "" %>
+<%= turbo_stream.update "modal", "" %>
 <%= turbo_stream.prepend "products", partial: "product", locals: { product: @product } %>
 <%= turbo_stream.prepend "flash", partial: "layouts/flash" %>
