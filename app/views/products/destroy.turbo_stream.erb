@@ -1,2 +1,3 @@
 <%= turbo_stream.remove dom_id(@product) %>
+<%= turbo_stream.update "product-count", Product.count %>
 <%= turbo_stream.prepend "flash", partial: "layouts/flash", locals: { message: "Product deleted." } %>

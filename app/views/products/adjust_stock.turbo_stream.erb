@@ -1,2 +1,3 @@
 <%= turbo_stream.replace dom_id(@product), partial: "products/product", locals: { product: @product } %>
+<%= turbo_stream.update "product-count", Product.count %>
 <%= turbo_stream.prepend "flash", partial: "layouts/flash", locals: { message: @result.message } %>
