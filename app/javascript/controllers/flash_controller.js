@@ -4,7 +4,7 @@ export default class extends Controller {
     connect() {
         setTimeout(() => {
             this.dismiss()
-        }, 4000)
+        }, 2000)
     }
 
     dismiss() {
