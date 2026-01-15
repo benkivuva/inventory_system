@@ -1,15 +1,13 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  name: MyString
-  description: MyText
+  name: "Product One"
+  description: "Description One"
   price: 9.99
-  quantity: 1
-  low_stock_threshold: 1
+  quantity: 10
+  low_stock_threshold: 5
 
 two:
-  name: MyString
-  description: MyText
-  price: 9.99
-  quantity: 1
-  low_stock_threshold: 1
+  name: "Product Two"
+  description: "Description Two"
+  price: 19.99
+  quantity: 0
+  low_stock_threshold: 5
