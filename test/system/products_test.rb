@@ -17,10 +17,10 @@ class ProductsTest < ApplicationSystemTestCase
     fill_in "Name", with: "System Test Product"
     fill_in "Description", with: "Created via system test"
     fill_in "Price", with: "99.99"
-    fill_in "Quantity", with: "10"
-    fill_in "Low stock threshold", with: "5"
-    
-    click_on "Create Product"
+    fill_in "Initial Stock", with: "10"
+    fill_in "Alert Threshold", with: "5"
+
+    click_on "Save Product"
 
     assert_text "Product was successfully created"
     assert_text "System Test Product"
